@@ -1,3 +1,4 @@
+from django.contrib.auth.hashers import make_password
 from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
 
@@ -23,12 +24,11 @@ class Kullanici(AbstractUser):
     user_permissions = models.ManyToManyField(
         Permission, related_name='customuser_user_permissions'
     )
-    """
     def save(self, *args, **kwargs):
         if not self.id:
-            self.password = make_password(self.password, gensalt())
-        super(CustomUser, self).save(*args, **kwargs)    
-    """
+            self.password = make_password(self.password)
+        super(Kullanici, self).save(*args, **kwargs)
+
 class Kiralama(models.Model):
     iha = models.ForeignKey(Iha, on_delete=models.CASCADE)
     kiralayan_uye = models.ForeignKey(Kullanici, on_delete=models.CASCADE)
