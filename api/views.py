@@ -4,11 +4,11 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .serializers import UserRegistrationSerializer
+from .serializers import UserRegistrationSerializer, MyTokenObtainPairSerializer
 
 class UserLoginAPIView(TokenObtainPairView):
-    serializer_class = TokenObtainPairSerializer
+    permission_classes = (AllowAny,)
+    serializer_class = MyTokenObtainPairSerializer
 
 class UserRegistrationAPIView(APIView):
     permission_classes = [AllowAny]
