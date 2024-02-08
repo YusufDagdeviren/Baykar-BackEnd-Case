@@ -1,7 +1,13 @@
 # serializers.py
 from rest_framework import serializers
-from .models import Kullanici
+from .models import Kullanici, Iha
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+
+class IhaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Iha
+        fields = '__all__'
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
