@@ -4,8 +4,12 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
-from .serializers import UserRegistrationSerializer, MyTokenObtainPairSerializer, IhaSerializer
-from .models import Iha
+from .serializers import (UserRegistrationSerializer,
+                          MyTokenObtainPairSerializer,
+                          IhaSerializer,
+                          KiralamaSerializer,
+                          KullaniciDetaySerializer)
+from .models import Iha, Kiralama, KullaniciDetay
 
 class IhaAPIView(generics.ListCreateAPIView):
     queryset = Iha.objects.all()
@@ -14,6 +18,24 @@ class IhaAPIView(generics.ListCreateAPIView):
 class IhaDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Iha.objects.all()
     serializer_class = IhaSerializer
+    permission_classes = [IsAuthenticated]
+class KullaniciDetayListCreateView(generics.ListCreateAPIView):
+    queryset = KullaniciDetay.objects.all()
+    serializer_class = KullaniciDetaySerializer
+    permission_classes = [IsAuthenticated]
+
+class KullaniciDetayRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = KullaniciDetay.objects.all()
+    serializer_class = KullaniciDetaySerializer
+    permission_classes = [IsAuthenticated]
+class KiralamaListCreateView(generics.ListCreateAPIView):
+    queryset = Kiralama.objects.all()
+    serializer_class = KiralamaSerializer
+    permission_classes = [IsAuthenticated]
+
+class KiralamaRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Kiralama.objects.all()
+    serializer_class = KiralamaSerializer
     permission_classes = [IsAuthenticated]
 
 
