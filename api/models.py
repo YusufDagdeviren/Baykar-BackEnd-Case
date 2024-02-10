@@ -30,13 +30,13 @@ class Kullanici(AbstractUser):
         super(Kullanici, self).save(*args, **kwargs)
 
 class Kiralama(models.Model):
-    iha = models.ForeignKey(Iha, on_delete=models.CASCADE)
-    kiralayan_uye = models.ForeignKey(Kullanici, on_delete=models.CASCADE)
+    iha = models.ForeignKey(Iha, on_delete=models.SET_NULL, null=True)
+    kiralayan_uye = models.ForeignKey(Kullanici, on_delete=models.SET_NULL, null=True)
     baslangic_tarihi = models.DateField()
     bitis_tarihi = models.DateField()
     baslangic_saat = models.TimeField()
     bitis_saat = models.TimeField()
 
 class KullaniciDetay(models.Model):
-    user = models.OneToOneField(Kullanici, on_delete=models.CASCADE)
+    user = models.OneToOneField(Kullanici, on_delete=models.SET_NULL, null=True)
     ihalar = models.ManyToManyField('Iha', related_name='kiralanan_ihalar', blank=True)
