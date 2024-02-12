@@ -1,11 +1,13 @@
 #!/bin/bash
 
-# Wait for the database to be ready
+# Bekleme işlemini gerçekleştir
 while ! pg_isready -h db -U $DB_USER -d $DB_NAME; do
-  echo "Waiting for database to become available..."
-  sleep  1
+  echo "Veritabanı hazır olana kadar bekleniyor..."
+  sleep 1
 done
 
-python manage.py makemigrations
+# Migrate işlemi gerçekleştir
 python manage.py migrate
-exec python manage.py runserver  0.0.0.0:8000
+
+# Django uygulamasını başlat
+exec python manage.py runserver 0.0.0.0:8000
