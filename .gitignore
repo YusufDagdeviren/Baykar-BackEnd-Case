@@ -4,5 +4,5 @@ db.sqlite3
 /env
 *.env
 .vscode
-*.txt
+istenilenler.txt
 /.idea
